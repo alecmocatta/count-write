@@ -1,0 +1,24 @@
+[package]
+name = "count-write"
+version = "0.1.0"
+authors = ["SOFe <sofe2038@gmail.com>"]
+edition = "2018"
+license = "Apache-2.0"
+repository = "https://github.com/SOF3/count-write.git"
+homepage = "https://github.com/SOF3/count-write"
+description = "An io::Write wrapper counting the number of bytes written"
+
+[features]
+futures = ["futures-io-preview"]
+tokio = ["tokio-io"]
+
+[dependencies]
+futures-io-preview = {version = "0.3.0-alpha.19", optional = true}
+tokio-io = {version = "0.2.0-alpha.6", optional = true}
+
+[package.metadata.docs.rs]
+features = ["futures", "tokio"]
+all-features = true
+
+[badges]
+travis-ci = {repository = "SOF3/count-write"}

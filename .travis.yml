@@ -1,0 +1,25 @@
+language: rust
+rust: [stable, beta, nightly]
+cache: cargo
+env:
+  matrix:
+    - RELEASE_FLAG="" FEATURES="--no-default-features"
+    - RELEASE_FLAG="--release" FEATURES="--no-default-features"
+    - RELEASE_FLAG="" FEATURES="--no-default-features --features futures"
+    - RELEASE_FLAG="--release" FEATURES="--no-default-features --features futures"
+    - RELEASE_FLAG="" FEATURES="--no-default-features --features tokio"
+    - RELEASE_FLAG="--release" FEATURES="--no-default-features --features tokio"
+    - RELEASE_FLAG="" FEATURES="--no-default-features --features tokio --features futures"
+    - RELEASE_FLAG="--release" FEATURES="--no-default-features --features tokio --features futures"
+
+install:
+  - "export RUSTFLAGS=$(cargo --version | grep nightly >/dev/null && echo \"-Z external-macro-backtrace\")"
+  - "rustup component add rustfmt --toolchain $(rustup show active-toolchain | cut -d\" \" -f1)"
+
+script:
+  - cargo fmt --all -- --check
+  - cargo check --all --verbose $RELEASE_FLAG $FEATURES
+  - cargo build --all --verbose $RELEASE_FLAG $FEATURES
+  - cargo test --all --verbose $RELEASE_FLAG $FEATURES
+  - cargo doc --all --verbose $RELEASE_FLAG $FEATURES
+
