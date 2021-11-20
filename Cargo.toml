@@ -9,12 +9,11 @@ homepage = "https://github.com/SOF3/count-write"
 description = "An io::Write wrapper counting the number of bytes written"
 
 [features]
-futures = ["futures-io-preview"]
-tokio = ["tokio-io"]
+futures = ["futures-io"]
 
 [dependencies]
-futures-io-preview = {version = "0.3.0-alpha.19", optional = true}
-tokio-io = {version = "0.2.0-alpha.6", optional = true}
+futures-io = {version = "0.3", optional = true}
+tokio = {version = "1", optional = true}
 
 [package.metadata.docs.rs]
 features = ["futures", "tokio"]

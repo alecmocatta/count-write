@@ -16,7 +16,7 @@
 use core::pin::Pin;
 use core::task::{Context, Poll};
 
-use tokio_io::AsyncWrite;
+use tokio::io::AsyncWrite;
 
 use crate::{CountWrite, Result};
 
